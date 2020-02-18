@@ -30,11 +30,8 @@ router.post('/register', (req, res) => {
         errors.email = 'Email already exists';
         return res.status(400).json(errors);
       } else {
-        const newUser = new User({
-          name: req.body.name,
-          email: req.body.email,
-          password: req.body.password
-        })
+        const { name, email, password } = req.body;
+        const newUser = new User({ name, email, password })
 
         bcrypt.genSalt(10, (err, salt) => {
           if (err) throw err;          
@@ -53,14 +50,11 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
-  console.log(errors);
-
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
 
   User.findOne({ email })
     .then(user => {
