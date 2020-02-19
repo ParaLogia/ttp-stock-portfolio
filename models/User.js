@@ -14,6 +14,10 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  balance: {
+    type: Schema.Types.Decimal128,
+    default: "5000.00"
+  },
   date: {
     type: Date,
     default: Date.now
