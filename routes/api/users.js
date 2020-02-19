@@ -26,7 +26,6 @@ router.post('/register', (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
       if (user) {
-        // Use the validations to send the error
         errors.email = 'Email already exists';
         return res.status(400).json(errors);
       } else {
@@ -39,7 +38,20 @@ router.post('/register', (req, res) => {
             if (err) throw err;
             newUser.password = hash;
             newUser.save()
-              .then(user => res.json(user))
+              .then(user => {
+                const payload = { id: user.id, name: user.name };
+
+                jwt.sign(
+                  payload,
+                  keys.secretOrKey,
+                  { expiresIn: 3600 },
+                  (err, token) => {
+                    res.json({
+                      success: true,
+                      token: 'Bearer ' + token
+                    });
+                  });
+              })
               .catch(err => console.log(err));
           })
         })
@@ -70,7 +82,6 @@ router.post('/login', (req, res) => {
             jwt.sign(
               payload,
               keys.secretOrKey,
-              // Tell the key to expire in one hour
               { expiresIn: 3600 },
               (err, token) => {
                 res.json({
