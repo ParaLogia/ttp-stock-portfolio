@@ -15,9 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (decodedUser.exp >= currentTime) {
       setAuthToken(localStorage.jwtToken);
+      decodedUser.balance = localStorage.balance;
       preloadedState = { session: { user: decodedUser } };
     } else {
       localStorage.removeItem('jwtToken')
+      localStorage.removeItem('balance')
     }
   }
   const store = configureStore(preloadedState);

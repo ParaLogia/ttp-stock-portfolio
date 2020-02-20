@@ -14,9 +14,16 @@ const TransactionForm = ({
 }) => {
   const [ symbol, setSymbol ] = useState('')
   const [ quantity, setQuantity ] = useState('')
+
   useEffect(() => {
     clearTransactionErrors();
   }, [clearTransactionErrors])
+
+  useEffect(() => {
+    if (balance) {
+      localStorage.setItem('balance', balance)
+    }
+  }, [balance])
 
   const handleSubmit = e => {
     e.preventDefault()

@@ -5,6 +5,7 @@ const keys = require('../../config/keys');
 const User = require('../../models/User');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const Big = require('big.js')
 
 const router = express.Router();
 
@@ -34,7 +35,7 @@ router.post('/register', (req, res) => {
                 const payload = { 
                   id: user.id, 
                   name: user.name,
-                  balance: user.balance.toString()
+                  balance: new Big(user.balance).toFixed(2)
                 }
 
                 jwt.sign(
@@ -76,7 +77,7 @@ router.post('/login', (req, res) => {
             const payload = {
               id: user.id,
               name: user.name,
-              balance: user.balance.toString()
+              balance: new Big(user.balance).toFixed(2)
             }
 
             jwt.sign(
