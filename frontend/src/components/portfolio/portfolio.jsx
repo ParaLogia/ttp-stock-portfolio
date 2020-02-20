@@ -14,13 +14,13 @@ const Portfolio = ({ stocks, totalValue, fetchPortfolio, transactionIds }) => {
   ))
 
   return (
-    <div className="portfolio-container">
-      <section className="portfolio">
+    <div className="list-container">
+      <section className="list">
         <h1>
           Portfolio {totalValue ? `($${totalValue})` : ''}
         </h1>
-        <div className="portfolio-scroller">
-          <ul className="portfolio-items">
+        <div className="scroller">
+          <ul className="scroller-list">
             {stockItems}
           </ul>
         </div>

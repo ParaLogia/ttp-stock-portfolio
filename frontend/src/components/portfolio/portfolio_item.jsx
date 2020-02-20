@@ -3,7 +3,7 @@ import React from 'react'
 const PortfolioItem = ({ symbol, quantity, unitPrice, totalPrice, trend }) => {
   const trendClass = (trend > 0) ? 'positive' : (trend < 0) ? 'negative' : 'neutral'
   return (
-    <li className={`portfolio-item ${trendClass}`}>
+    <li className={`scroller-item ${trendClass}`}>
       <div>
         <span className="symbol">
           {symbol}

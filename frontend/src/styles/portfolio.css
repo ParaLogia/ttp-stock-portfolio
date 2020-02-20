@@ -1,11 +1,12 @@
-.portfolio-container {
-  flex-grow: 2;
+.list-container {
+  width: 55%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 
-.portfolio {
+.list {
   padding: 3.5em 0;  
   height: 100vh;
   box-sizing: border-box;
@@ -13,13 +14,13 @@
   flex-direction: column;
 }
 
-.portfolio h1 {
+.list h1 {
   text-align: center;
   font-size: 1.75em;
   margin-bottom: 1.75em;
 }
 
-.portfolio-scroller {
+.scroller {
   flex-grow: 1;
   overflow-y: scroll;
   box-sizing: border-box;
@@ -29,11 +30,11 @@
   align-items: center;
 }
 
-.portfolio-items {
+.scroller-list {
   width: 100%;
 }
 
-.portfolio-item {
+.scroller-item {
   display: flex;
   justify-content: space-between;
   font-size: 1.15em;
@@ -43,31 +44,31 @@
   border-bottom: 2px solid black;
 }
 
-.portfolio-item .symbol {
+.scroller-item .symbol {
   font-weight: bolder;
 }
 
-.portfolio-item div:first-of-type {
+.scroller-item div:first-of-type {
   margin-right: 0.75em;
 }
 
-.portfolio-item .symbol:after {
+.scroller-item .symbol:after {
   content: ' - ';
   margin: 0 0.5em;
   color: black;
 }
 
-.portfolio-item.positive .symbol,
-.portfolio-item.positive .price {
+.scroller-item.positive .symbol,
+.scroller-item.positive .price {
   color: green;
 }
 
-.portfolio-item.neutral .symbol,
-.portfolio-item.neutral .price {
+.scroller-item.neutral .symbol,
+.scroller-item.neutral .price {
   color: gray;
 }
 
-.portfolio-item.negative .symbol,
-.portfolio-item.negative .price {
+.scroller-item.negative .symbol,
+.scroller-item.negative .price {
   color: red;
 }
