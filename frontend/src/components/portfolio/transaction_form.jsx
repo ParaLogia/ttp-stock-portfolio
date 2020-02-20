@@ -14,7 +14,7 @@ const TransactionForm = ({ balance, createTransaction }) => {
       quantity
     }).then(() => {
       setSymbol('')
-      setQuantity(1)
+      setQuantity('')
     })
   }
 
