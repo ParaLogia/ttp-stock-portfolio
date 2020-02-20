@@ -1,6 +1,5 @@
 const express = require("express");
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const User = require('../../models/User');
@@ -8,14 +7,6 @@ const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
 const router = express.Router();
-
-router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.json({
-    id: req.user.id,
-    name: req.user.name,
-    email: req.user.email
-  });
-})
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
@@ -40,7 +31,11 @@ router.post('/register', (req, res) => {
             newUser.password = hash;
             newUser.save()
               .then(user => {
-                const payload = { id: user.id, name: user.name };
+                const payload = { 
+                  id: user.id, 
+                  name: user.name,
+                  balance: user.balance.toString()
+                }
 
                 jwt.sign(
                   payload,
@@ -78,7 +73,11 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            const payload = { id: user.id, name: user.name };
+            const payload = {
+              id: user.id,
+              name: user.name,
+              balance: user.balance.toString()
+            }
 
             jwt.sign(
               payload,

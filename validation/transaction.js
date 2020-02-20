@@ -5,6 +5,7 @@ module.exports = function validateLoginInput(data) {
   let errors = {};
 
   data.symbol = validText(data.symbol) ? data.symbol : '';
+  data.quantity = data.quantity.toString();
 
   if (Validator.isEmpty(data.symbol)) {
     errors.symbol = 'Ticker symbol is required';

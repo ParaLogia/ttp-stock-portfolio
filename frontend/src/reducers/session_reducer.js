@@ -2,6 +2,7 @@ import {
   RECEIVE_CURRENT_USER,
   RECEIVE_USER_LOGOUT
 } from '../actions/session_actions';
+import { RECEIVE_TRANSACTION } from '../actions/transaction_actions'
 
 const _preloadedState = {
   user: null
@@ -17,9 +18,14 @@ export default function (state = _preloadedState, action) {
       };
 
     case RECEIVE_USER_LOGOUT:
+      return _preloadedState
+
+    case RECEIVE_TRANSACTION:
       return {
-        user: null
-      };
+        user: Object.assign({}, state.user, {
+          balance: action.balance
+        })
+      }
 
     default:
       return state;
