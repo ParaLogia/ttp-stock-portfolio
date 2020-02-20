@@ -14,6 +14,10 @@ class LoginForm extends React.Component {
     this.renderErrors = this.renderErrors.bind(this);
   }
 
+  componentDidMount() {
+    this.props.clearErrors()
+  }
+
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
