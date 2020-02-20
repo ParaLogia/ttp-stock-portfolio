@@ -95,6 +95,13 @@ async function compilePortolio(user) {
       }
     }
   }
+
+  if (Object.keys(stocks).length === 0) {
+    return {
+      stocks: [],
+      totalValue: 0
+    }
+  }
   const quotes = await ApiUtil.getQuotes(Object.keys(stocks))
 
   // Total value of portfolio
