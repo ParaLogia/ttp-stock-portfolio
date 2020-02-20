@@ -12,7 +12,8 @@ const TransactionSchema = new Schema({
   },
   quantity: {
     type: Number,
-    required: true
+    required: true,
+    min: 1
   },
   unitPrice: {
     type: Schema.Types.Decimal128,

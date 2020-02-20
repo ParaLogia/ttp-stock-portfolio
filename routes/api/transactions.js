@@ -2,6 +2,8 @@ const express = require('express');
 const passport = require('passport');
 const Big = require('big.js');
 const Transaction = require('../../models/Transaction');
+const validateTransactionInput = require('../../validation/transaction');
+const { getQuote } = require('../../util/api_util');
 
 const router = express.Router();
 
@@ -18,31 +20,42 @@ router.post('/',
   (req, res) => {
     const { user, body } = req;
 
-    // TODO get price from API
-    const unitPrice = new Big('3.14');
-    const totalCost = new Big(body.quantity).times(unitPrice);
-    const newBalance = new Big(user.balance).minus(totalCost);
+    const { errors, isValid } = validateTransactionInput(req.body);
 
-    if (newBalance < 0) {
-      return res.status(422).json({transaction: 'Insufficient balance'})
+    if (!isValid) {
+      return res.status(400).json(errors);
     }
 
-    user.balance = newBalance.toString();
+    getQuote(body.symbol)
+      .then(({ price }) => {
+        const unitPrice = new Big(price);
+        const totalCost = new Big(body.quantity).times(unitPrice);
+        const newBalance = new Big(user.balance).minus(totalCost);
 
-    user.save()
-      .then(() => {
-        const newTransaction = new Transaction({
-          symbol: body.symbol,
-          user: user.id,
-          quantity: body.quantity,
-          unitPrice
-        });
+        if (newBalance < 0) {
+          return res.status(422).json({balance: 'Insufficient balance'})
+        }
 
-        newTransaction.save()
-          .then(transaction => res.json({ 
+        user.balance = newBalance.toString();
+
+        user.save()
+          .then(() => {
+            const newTransaction = new Transaction({
+              symbol: body.symbol,
+              user: user.id,
+              quantity: body.quantity,
+              unitPrice
+            });
+
+            return newTransaction.save()              
+          })
+          .then(transaction => res.json({
             transaction,
             balance: user.balance.toString()
-          }));
+          }))
+          .catch(err => {
+            res.status(422).json(err)
+          })
       })
       .catch(err => {
         res.status(422).json(err)
