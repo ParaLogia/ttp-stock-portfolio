@@ -11,8 +11,17 @@ const router = express.Router();
 router.get('/', 
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Transaction.find({user: req.user.id})
-      .then(transactions => res.json(transactions))
+    Transaction
+      .find({user: req.user.id})
+      .sort({date: -1})
+      .then(transactions => {
+        transactions = transactions.map(tr => (
+          Object.assign({}, tr._doc, {
+            unitPrice: new Big(tr.unitPrice.toString()).toFixed(2)
+          })
+        ))
+        return res.json(transactions)
+      })
       .catch(err => res.status(422).json(err));
   });
 
