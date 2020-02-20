@@ -65,7 +65,10 @@ router.post('/',
 );
 
 async function compilePortolio(user) {
-  const transactions = await Transaction.find({ user: user.id })
+  const transactions = 
+    await Transaction
+      .find({ user: user.id })
+      .sort({ date: -1 })
 
   const portfolio = {}
   for (let transaction of transactions) {
