@@ -1,5 +1,5 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react'
+import '../../styles/session.css'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -45,28 +45,25 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input type="email"
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder="Email"
-            />
-            <br />
-            <input type="password"
-              value={this.state.password}
-              onChange={this.update('password')}
-              placeholder="Password"
-            />
-            <br />
-            <input type="submit" value="Submit" />
-            {this.renderErrors()}
-          </div>
+      <div className="session-form-container">
+        <h2>Sign In</h2>
+        <form className="session-form" onSubmit={this.handleSubmit}>
+          <input type="email"
+            value={this.state.email}
+            onChange={this.update('email')}
+            placeholder="Email"
+          />
+          <input type="password"
+            value={this.state.password}
+            onChange={this.update('password')}
+            placeholder="Password"
+          />
+          <input type="submit" value="Submit" />
+          {this.renderErrors()}
         </form>
       </div>
     );
   }
 }
 
-export default withRouter(LoginForm);
+export default LoginForm;

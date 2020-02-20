@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import '../../styles/session.css'
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class SignupForm extends React.Component {
       password: this.state.password
     };
 
-    this.props.signup(user, this.props.history);
+    this.props.signup(user);
   }
 
   renderErrors() {
@@ -45,34 +45,30 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div className="signup-form-container">
-        <form onSubmit={this.handleSubmit}>
-          <div className="signup-form">
-            <input type="email"
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder="Email"
-            />
-            <br />
-            <input type="text"
-              value={this.state.name}
-              onChange={this.update('name')}
-              placeholder="Name"
-            />
-            <br />
-            <input type="password"
-              value={this.state.password}
-              onChange={this.update('password')}
-              placeholder="Password"
-            />
-            <br />
-            <input type="submit" value="Submit" />
-            {this.renderErrors()}
-          </div>
+      <div className="session-form-container">
+        <h2>Register</h2>
+        <form className="session-form" onSubmit={this.handleSubmit}>
+          <input type="email"
+            value={this.state.email}
+            onChange={this.update('email')}
+            placeholder="Email"
+          />
+          <input type="text"
+            value={this.state.name}
+            onChange={this.update('name')}
+            placeholder="Name"
+          />
+          <input type="password"
+            value={this.state.password}
+            onChange={this.update('password')}
+            placeholder="Password"
+          />
+          <input type="submit" value="Submit" />
+          {this.renderErrors()}
         </form>
       </div>
     );
   }
 }
 
-export default withRouter(SignupForm);
+export default SignupForm;

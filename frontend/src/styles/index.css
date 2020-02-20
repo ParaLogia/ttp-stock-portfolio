@@ -5,6 +5,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-color: whitesmoke;
+}
+
+h1, h2, h3, h4, p, span, div, li, ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 code {
@@ -29,4 +39,16 @@ a.active:hover {
   width: 2px;
   min-height: 100%;
   background-color: black;
+}
+
+input {
+  padding: 0.75em 1.25em;
+  font-size: 1em;
+  margin: 1em 0px;
+  border: 1px solid rgb(49, 49, 49);
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: lightgray;
 }
