@@ -27,8 +27,8 @@ router.post('/',
     }
 
     getQuote(body.symbol)
-      .then(({ price }) => {
-        const unitPrice = new Big(price);
+      .then(({ latestPrice }) => {
+        const unitPrice = new Big(latestPrice);
         const totalCost = new Big(body.quantity).times(unitPrice);
         const newBalance = new Big(user.balance).minus(totalCost);
 
