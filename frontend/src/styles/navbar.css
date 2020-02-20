@@ -1,0 +1,31 @@
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 15px 25px;
+}
+
+.nav-link-container {
+  display: flex;
+  align-items: stretch;
+}
+
+.navbar a {
+  margin: 0 1em;
+}
+
+.logout-button {
+  display: inline-block;
+  background-color: transparent;
+  padding: 0;
+  margin-left: 1em;
+  border: none;
+  border-radius: 0.5em;
+  color: darkcyan;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+}

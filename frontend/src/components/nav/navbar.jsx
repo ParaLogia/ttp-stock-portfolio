@@ -1,25 +1,32 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
+import '../../styles/navbar.css'
 
 const NavBar = ({ loggedIn, logout }) => {
   const links = loggedIn ? (
-    <div>
-      <NavLink to={'/portfolio'}>Portfolio</NavLink>
-      <NavLink to={'/transactions'}>Transactions</NavLink>
-      <button onClick={logout}>Logout</button>
-    </div>
+    <>
+      <div className="nav-link-container">
+        <NavLink to={'/portfolio'}>Portfolio</NavLink>
+        <div className="vert-sep"></div>
+        <NavLink to={'/transactions'}>Transactions</NavLink>
+        <div className="vert-sep"></div>
+        <button className="logout-button" onClick={logout}>
+          Logout
+      </button>
+      </div>
+    </>
   ) : (
-    <div>
-      <NavLink to={'/signup'}>Signup</NavLink>
-      <NavLink to={'/login'}>Login</NavLink>
+    <div className="nav-link-container">
+      <NavLink to={'/signup'}>Register</NavLink>
+      <div className="vert-sep"></div>
+      <NavLink to={'/login'}>Sign In</NavLink>
     </div>
   )
 
   return (
-    <div>
-      <h1>TTP Stocks</h1>
+    <nav className="navbar">
       {links}
-    </div>
+    </nav>
   );
   
 }
