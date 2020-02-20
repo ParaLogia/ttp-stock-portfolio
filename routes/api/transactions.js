@@ -17,7 +17,7 @@ router.get('/',
       .then(transactions => {
         transactions = transactions.map(tr => (
           Object.assign({}, tr._doc, {
-            unitPrice: new Big(tr.unitPrice.toString()).toFixed(2)
+            unitPrice: new Big(tr.unitPrice).toFixed(2)
           })
         ))
         return res.json(transactions)
@@ -59,10 +59,15 @@ router.post('/',
 
             return newTransaction.save()              
           })
-          .then(transaction => res.json({
-            transaction,
-            balance: user.balance.toString()
-          }))
+          .then(transaction => {
+            transaction = Object.assign({}, transaction._doc, {
+              unitPrice: new Big(transaction.unitPrice).toFixed(2)
+            })
+            res.json({
+              transaction,
+              balance: user.balance.toString()
+            })
+          })
           .catch(err => {
             res.status(422).json(err)
           })
