@@ -15,25 +15,26 @@ export const receiveTransaction = ({ transaction, balance }) => ({
   balance
 });
 
-export const receivePortfolio = portfolio => ({
+export const receivePortfolio = ({ portfolio, balance }) => ({
   type: RECEIVE_PORTFOLIO,
-  portfolio
+  portfolio,
+  balance
 });
 
 export const fetchTransactions = () => dispatch => {
-  APIUtil.fetchTransactions()
+  return APIUtil.fetchTransactions()
     .then(res => dispatch(receiveTransactions(res.data)))
-    .catch(err => console.warn(err))  // TODO transactions errors
+    .catch(err => console.warn(err.response.data))
 }
 
 export const createTransaction = transactionData => dispatch => {
-  APIUtil.createTransaction(transactionData)
+  return APIUtil.createTransaction(transactionData)
     .then(res => dispatch(receiveTransaction(res.data)))
-    .catch(err => console.warn(err))
+    .catch(err => console.warn(err.response.data))
 }
 
 export const fetchPortfolio = () => dispatch => {
-  APIUtil.fetchPortfolio()
+  return APIUtil.fetchPortfolio()
     .then(res => dispatch(receivePortfolio(res.data)))
-    .catch(err => console.warn(err)) 
+    .catch(err => console.warn(err.response.data)) 
 }

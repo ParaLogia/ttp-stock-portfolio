@@ -42,7 +42,7 @@ router.post('/',
         user.save()
           .then(() => {
             const newTransaction = new Transaction({
-              symbol: body.symbol,
+              symbol: body.symbol.toUpperCase(),
               user: user.id,
               quantity: body.quantity,
               unitPrice
@@ -70,14 +70,15 @@ async function compilePortolio(user) {
       .find({ user: user.id })
       .sort({ date: -1 })
 
-  const portfolio = {}
+  const stocks = {}
   for (let transaction of transactions) {
-    const { symbol, quantity } = transaction
-    if (portfolio.hasOwnProperty(symbol)) {
-      portfolio[symbol].quantity += quantity
+    const { quantity } = transaction
+    const symbol = transaction.symbol.toUpperCase();
+    if (stocks.hasOwnProperty(symbol)) {
+      stocks[symbol].quantity += quantity
     }
     else {
-      portfolio[symbol] = { 
+      stocks[symbol] = { 
         quantity,
         unitPrice: 0,
         totalPrice: 0,
@@ -85,28 +86,38 @@ async function compilePortolio(user) {
       }
     }
   }
-  const quotes = await ApiUtil.getQuotes(Object.keys(portfolio))
+  const quotes = await ApiUtil.getQuotes(Object.keys(stocks))
 
-  portfolio._value = new Big(0)
+  // Total value of portfolio
+  let totalValue = new Big(0)
 
   Object.entries(quotes).forEach(([ symbol, { quote } ]) => {
     const { latestPrice, open, previousClose } = quote
-    const stock = portfolio[symbol];
+    const stock = stocks[symbol];
     stock.unitPrice = new Big(latestPrice)
-    stock.trend = stock.unitPrice.cmp(open || previousClose);
-    stock.totalPrice = stock.unitPrice.times(stock.quantity)
-
-    portfolio._value = portfolio._value.plus(stock.totalPrice)
+    stock.trend = stock.unitPrice.cmp(open || previousClose)
+    stock.totalPrice = stock.unitPrice.times(stock.quantity).toFixed(2)
+    stock.unitPrice = stock.unitPrice.toFixed(2)
+    
+    totalValue = totalValue.plus(stock.totalPrice)
   })
 
-  return portfolio;
+  totalValue = totalValue.toFixed(2)
+
+  return {
+    stocks,
+    totalValue
+  };
 }
 
 router.get('/summary', 
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     compilePortolio(req.user)
-      .then(portfolio => res.json(portfolio))
+      .then(portfolio => res.json({ 
+        portfolio,  
+        balance : new Big(req.user.balance).toFixed(2)
+      }))
       .catch(err => res.status(400).json(err))
   }
 )
