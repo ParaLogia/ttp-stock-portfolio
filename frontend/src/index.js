@@ -5,8 +5,6 @@ import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 
-import * as TA from './actions/transaction_actions';
-
 document.addEventListener('DOMContentLoaded', () => {
   let preloadedState = {};
 
@@ -26,7 +24,4 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
 
   ReactDOM.render(<Root store={store} />, root);
-
-  window.TA = TA;
-  window.dispatch = store.dispatch;
 });

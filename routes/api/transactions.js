@@ -81,18 +81,22 @@ async function compilePortolio(user) {
         quantity,
         unitPrice: 0,
         totalPrice: 0,
-        open: 0
+        trend: 0
       }
     }
   }
   const quotes = await ApiUtil.getQuotes(Object.keys(portfolio))
 
+  portfolio._value = new Big(0)
+
   Object.entries(quotes).forEach(([ symbol, { quote } ]) => {
     const { latestPrice, open, previousClose } = quote
     const stock = portfolio[symbol];
     stock.unitPrice = new Big(latestPrice)
+    stock.trend = stock.unitPrice.cmp(open || previousClose);
     stock.totalPrice = stock.unitPrice.times(stock.quantity)
-    stock.open = open || previousClose
+
+    portfolio._value = portfolio._value.plus(stock.totalPrice)
   })
 
   return portfolio;
