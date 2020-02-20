@@ -20,7 +20,7 @@ const Portfolio = ({ stocks, totalValue, fetchPortfolio, transactionIds }) => {
           Portfolio {totalValue ? `($${totalValue})` : ''}
         </h1>
         <div className="portfolio-scroller">
-          <ul>
+          <ul className="portfolio-items">
             {stockItems}
           </ul>
         </div>

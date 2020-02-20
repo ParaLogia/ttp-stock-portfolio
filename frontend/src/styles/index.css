@@ -17,7 +17,7 @@ main {
   max-height: 100vh;
 }
 
-h1, h2, h3, h4, p, span, div, li, ul, ol {
+h1, h2, h3, h4, p, span, div, li, ul, ol, form {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -43,8 +43,12 @@ a.active:hover {
 
 .vert-sep {
   width: 2px;
-  min-height: 100%;
+  min-height: 80%;
   background-color: black;
+}
+
+main .vert-sep {
+  margin: 8.6em 0 3.5em;
 }
 
 input {

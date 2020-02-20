@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createTransaction } from '../../actions/transaction_actions'
+import '../../styles/transaction_form.css'
 
 const TransactionForm = ({ balance, createTransaction }) => {
   const [ symbol, setSymbol ] = useState('')
-  const [ quantity, setQuantity ] = useState('1')
+  const [ quantity, setQuantity ] = useState('')
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -18,10 +19,10 @@ const TransactionForm = ({ balance, createTransaction }) => {
   }
 
   return (
-    <div>
-      <p>Cash - ${balance}</p>
+    <div className="transaction-form-container">
+      <p className="balance">Cash - ${balance}</p>
 
-      <form onSubmit={handleSubmit}>
+      <form className="transaction-form" onSubmit={handleSubmit}>
         <input 
           type="text" 
           value={symbol} 

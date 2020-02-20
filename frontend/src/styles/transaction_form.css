@@ -1,0 +1,21 @@
+.transaction-form-container {
+  margin-top: 8em;
+  flex-grow: 1;
+  padding: 1em 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.balance {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.transaction-form {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 85%;
+}
