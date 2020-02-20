@@ -30,7 +30,7 @@ code {
 
 a {
   text-decoration: none;
-  color: darkcyan;
+  color: #0b8460;
 }
 
 a.active {
@@ -61,4 +61,12 @@ input {
 input[type="submit"]:hover {
   cursor: pointer;
   background-color: lightgray;
+}
+
+.errors {
+  color: #e22020;
+}
+
+.errors li {
+  margin-bottom: 0.5em;
 }
