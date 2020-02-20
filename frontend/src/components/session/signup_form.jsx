@@ -37,7 +37,7 @@ class SignupForm extends React.Component {
 
   renderErrors() {
     return (
-      <ul>
+      <ul className="errors">
         {Object.values(this.props.errors).map((error, i) => (
           <li key={`error-${i}`}>
             {error}
@@ -52,15 +52,15 @@ class SignupForm extends React.Component {
       <div className="session-form-container">
         <h2>Register</h2>
         <form className="session-form" onSubmit={this.handleSubmit}>
-          <input type="email"
-            value={this.state.email}
-            onChange={this.update('email')}
-            placeholder="Email"
-          />
           <input type="text"
             value={this.state.name}
             onChange={this.update('name')}
             placeholder="Name"
+          />
+          <input type="email"
+            value={this.state.email}
+            onChange={this.update('email')}
+            placeholder="Email"
           />
           <input type="password"
             value={this.state.password}

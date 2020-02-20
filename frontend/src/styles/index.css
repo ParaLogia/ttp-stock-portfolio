@@ -58,9 +58,17 @@ input {
   border: 1px solid rgb(49, 49, 49);
 }
 
+input:focus {
+  outline-color: #0b8460;
+}
+
+input[type="submit"] {
+  background-color: #b4cec6;
+}
+
 input[type="submit"]:hover {
   cursor: pointer;
-  background-color: lightgray;
+  background-color: #a8c5bc;
 }
 
 .errors {

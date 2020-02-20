@@ -65,7 +65,7 @@
 
 .scroller-item.neutral .symbol,
 .scroller-item.neutral .price {
-  color: gray;
+  color: #4d6666;
 }
 
 .scroller-item.negative .symbol,

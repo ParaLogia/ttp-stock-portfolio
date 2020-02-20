@@ -1,11 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { createTransaction } from '../../actions/transaction_actions'
+import { 
+  createTransaction, 
+  clearTransactionErrors 
+} from '../../actions/transaction_actions'
 import '../../styles/transaction_form.css'
 
-const TransactionForm = ({ balance, createTransaction, errors }) => {
+const TransactionForm = ({ 
+  balance, 
+  createTransaction, 
+  errors,
+  clearTransactionErrors
+}) => {
   const [ symbol, setSymbol ] = useState('')
   const [ quantity, setQuantity ] = useState('')
+  useEffect(() => {
+    clearTransactionErrors();
+  }, [clearTransactionErrors])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -57,7 +68,8 @@ const msp = state => ({
 })
 
 const mdp = { 
-  createTransaction
+  createTransaction,
+  clearTransactionErrors
 }
 
 export default connect(msp, mdp)(TransactionForm)
