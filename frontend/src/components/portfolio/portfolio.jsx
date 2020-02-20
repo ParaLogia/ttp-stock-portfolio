@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchPortfolio } from '../../actions/transaction_actions'
 import PortfolioItem from './portfolio_item'
+import '../../styles/portfolio.css'
 
 const Portfolio = ({ stocks, totalValue, fetchPortfolio, transactionIds }) => {
   useEffect(() => {
@@ -13,16 +14,18 @@ const Portfolio = ({ stocks, totalValue, fetchPortfolio, transactionIds }) => {
   ))
 
   return (
-    <section>
-      <h1>
-        Portfolio {totalValue ? `($${totalValue})` : ''}
-      </h1>
-      <div>
-        <ul>
-          {stockItems}
-        </ul>
-      </div>
-    </section>
+    <div className="portfolio-container">
+      <section className="portfolio">
+        <h1>
+          Portfolio {totalValue ? `($${totalValue})` : ''}
+        </h1>
+        <div className="portfolio-scroller">
+          <ul>
+            {stockItems}
+          </ul>
+        </div>
+      </section>
+    </div>
   )
 }
 

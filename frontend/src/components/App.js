@@ -8,7 +8,7 @@ import Home from './portfolio/home';
 import TransactionHistory from './transactions/transaction_history'
 
 const App = () => (
-  <div>
+  <>
     <NavBarContainer />
     <Switch>
       <AuthRoute exact path="/login" component={LoginFormContainer} />
@@ -16,7 +16,7 @@ const App = () => (
       <ProtectedRoute path ="/transactions" component={TransactionHistory} />
       <ProtectedRoute path ="/" component={Home} />
     </Switch>
-  </div>
+  </>
 );
 
 export default App;

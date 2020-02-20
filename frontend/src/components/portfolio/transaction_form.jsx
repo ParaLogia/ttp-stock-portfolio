@@ -36,7 +36,7 @@ const TransactionForm = ({ balance, createTransaction }) => {
           step="1" 
           placeholder={"Quantity"}/>
 
-        <button>Buy</button>
+        <input type="submit" value="Buy"/>
       </form>
     </div>
   )

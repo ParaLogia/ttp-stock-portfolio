@@ -1,13 +1,19 @@
 import React from 'react'
 
 const PortfolioItem = ({ symbol, quantity, unitPrice, totalPrice, trend }) => {
+  const trendClass = (trend > 0) ? 'positive' : (trend < 0) ? 'negative' : 'neutral'
   return (
-    <li>
+    <li className={`portfolio-item ${trendClass}`}>
       <div>
-        {symbol} - {quantity} {quantity === 1 ? 'Share' : 'Shares'}
+        <span className="symbol">
+          {symbol}
+        </span>
+        <i>
+          {quantity} {quantity === 1 ? 'Share' : 'Shares'}
+        </i>
       </div>
-      <div>
-        ${totalPrice}
+      <div className="price">
+        ${unitPrice}
       </div>
     </li>
   )
