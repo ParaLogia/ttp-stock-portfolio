@@ -14,6 +14,7 @@ const TransactionForm = ({
 }) => {
   const [ symbol, setSymbol ] = useState('')
   const [ quantity, setQuantity ] = useState('')
+  const [ busy, setBusy ] = useState(false)
 
   useEffect(() => {
     clearTransactionErrors();
@@ -27,12 +28,14 @@ const TransactionForm = ({
 
   const handleSubmit = e => {
     e.preventDefault()
+    setBusy(true)
     createTransaction({
       symbol,
       quantity
     }).then(() => {
       setSymbol('')
       setQuantity('')
+      setBusy(false)
     })
   }
 
@@ -59,7 +62,7 @@ const TransactionForm = ({
           step="1" 
           placeholder={"Quantity"}/>
 
-        <input type="submit" value="Buy"/>
+        <input type="submit" value="Buy" disabled={busy}/>
       </form>
 
       <ul className="errors">

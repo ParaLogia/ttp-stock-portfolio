@@ -71,6 +71,15 @@ input[type="submit"]:hover {
   background-color: #a8c5bc;
 }
 
+input[type="submit"]:disabled {
+  background-color: #c1ccc9;
+}
+
+input[type="submit"]:disabled:hover {
+  cursor: default;
+  background-color: #c1ccc9;
+}
+
 .errors {
   color: #e22020;
 }
