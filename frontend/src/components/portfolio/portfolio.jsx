@@ -6,10 +6,21 @@ import '../../styles/portfolio.css'
 
 const Portfolio = ({ stocks, totalValue, fetchPortfolio, transactionIds }) => {
   const loaded = useRef(false);
+  const timer = useRef(null);
+
+  // Query the api for market prices every 8 seconds
+  const subscribeToMarket = () => {
+    fetchPortfolio()
+    timer.current = window.setTimeout(subscribeToMarket, 8000)
+  }
 
   useEffect(() => {
-    fetchPortfolio()
     loaded.current = true
+    subscribeToMarket()
+
+    return () => {
+      window.clearTimeout(timer.current);
+    }
   }, [transactionIds, fetchPortfolio])
 
   const stockItems = stocks && Object.entries(stocks).map(([ symbol, props ]) => (
