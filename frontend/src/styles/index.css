@@ -77,4 +77,16 @@ input[type="submit"]:hover {
 
 .errors li {
   margin-bottom: 0.5em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.app-footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 15px 25px;
+  font-size: 0.7em;
+  color: #5b7a7a;
 }

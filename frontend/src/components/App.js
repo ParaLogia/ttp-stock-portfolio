@@ -6,6 +6,7 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import Home from './portfolio/home';
 import TransactionHistory from './transactions/transaction_history'
+import Footer from './nav/footer'
 
 const App = () => (
   <>
@@ -16,6 +17,7 @@ const App = () => (
       <ProtectedRoute path ="/transactions" component={TransactionHistory} />
       <ProtectedRoute path ="/" component={Home} />
     </Switch>
+    <Footer />
   </>
 );
 
